@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { StyledApp, Header, MoviesSection } from "./StyledApp";
+
+import "./App.css";
 
 function App() {
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {}, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledApp>
+      <Header>
+        <div className="sidebar">
+          <h2>Movie App</h2>
+        </div>
+        <div className="search">
+          <i className="fas fa-search"></i>
+          <input
+            className="search-movie"
+            type="text"
+            placeholder="Find whatever you want"
+          />
+        </div>
+      </Header>
+      <MoviesSection>
+        <div className="features">
+          <h3>features</h3>
+        </div>
+        <div className="movies-container">
+          <h3>movies container</h3>
+        </div>
+      </MoviesSection>
+    </StyledApp>
   );
 }
 
