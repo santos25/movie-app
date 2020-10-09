@@ -15,7 +15,7 @@ export const Header = styled.header`
   /* border: 1px solid black; */
 
   .sidebar {
-    width: 25%;
+    width: 15%;
     /* border: 1px solid black; */
   }
 
@@ -39,15 +39,42 @@ export const Header = styled.header`
   }
 `;
 
-export const MoviesSection = styled.section`
+export const Container = styled.div`
   display: flex;
   /* border: 1px solid black; */
-
-  .features {
-    width: 25%;
+  /* align-items: center; */
+  .left-side {
+    width: 15%;
     /* border: 1px solid black; */
   }
 
-  .movies-container {
+  .filter-container {
+    display: flex;
+    width: 85%;
+    /* border: 1px solid black; */
+    padding: 10px 15px;
+    align-items: center;
+    justify-content: space-around;
+
+    .filter {
+      display: flex;
+      justify-content: space-around;
+      width: 70%;
+      /* border: 1px solid black; */
+    }
+  }
+
+  .right-side {
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: space-around; */
+    max-width: 85%;
+    /* border: 1px solid black; */
+
+    .movies {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+    }
   }
 `;
