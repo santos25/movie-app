@@ -4,7 +4,6 @@ const Pagination = ({ moviesPerPage, totalMovies, paginate }) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalMovies / moviesPerPage); i++) {
-    console.log(i);
     if (i === 11) {
       break;
     } else {

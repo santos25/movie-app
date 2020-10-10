@@ -17,10 +17,11 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [moviesPerPage] = useState(20);
   const [totalMovies, setTotalMovies] = useState(0);
+  const [endpoint, setEndPoint] = useState("movie/popular");
 
   useEffect(() => {
     const fetch = async () => {
-      const dataMovies = await fetchMovies("movie/popular");
+      const dataMovies = await fetchMovies(endpoint);
       setMovies(dataMovies.results);
       setTotalMovies(dataMovies.total_results);
       const { genres } = await fetchGenres();
@@ -37,7 +38,7 @@ function App() {
       response = await fetchSearchMovie(value);
       settitle("Most Popular");
     } else {
-      response = await fetchMovies("movie/popular");
+      response = await fetchMovies(endpoint);
     }
     setMovies(response.results);
   };
@@ -51,22 +52,29 @@ function App() {
         response = await fetchMovies("movie/popular");
         setMovies(response.results);
         settitle("Most Popular");
+        setEndPoint("movie/popular");
 
         break;
       case "now":
         response = await fetchMovies("movie/now_playing");
         setMovies(response.results);
         settitle("Now Playing");
+        setEndPoint("movie/now_playing");
+
         break;
       case "top":
         response = await fetchMovies("movie/top_rated");
         setMovies(response.results);
         settitle("Top Rated");
+        setEndPoint("movie/top_rated");
+
         break;
       case "up":
         response = await fetchMovies("movie/upcoming");
         setMovies(response.results);
         settitle("Upcoming");
+        setEndPoint("movie/upcoming");
+
         break;
       default:
         break;
@@ -78,19 +86,21 @@ function App() {
     const value = e.target.value;
     let response;
     if (value === "all") {
-      response = await fetchMovies("movie/popular");
+      response = await fetchMovies(endpoint);
       setMovies(response.results);
       settitle("Most Popular");
     } else {
-      const endpoint = `discover/movie?with_genres=${value}`;
-      response = await fetchMovies(endpoint);
+      const newEndPoint = "discover/movie";
+      response = await fetchMovies(`${newEndPoint}?with_genres=${value}`);
       setMovies(response.results);
+      setEndPoint(newEndPoint);
     }
   };
   // console.log(movies);
 
   const handlePaginate = (number) => {
     console.log(number);
+    console.log(endpoint);
   };
 
   return (
