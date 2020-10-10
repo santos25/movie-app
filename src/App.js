@@ -6,6 +6,7 @@ import { fetchMovies, fetchSearchMovie, fetchGenres } from "./Api/Api";
 import Filter from "./Components/Filter/Filter";
 import Categories from "./Components/Categories/Categories";
 import Movie from "./Components/Movie/Movie";
+import Pagination from "./Components/Pagination/Pagination";
 
 import "./App.css";
 
@@ -13,11 +14,15 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
   const [title, settitle] = useState("Most Popular");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [moviesPerPage] = useState(20);
+  const [totalMovies, setTotalMovies] = useState(0);
 
   useEffect(() => {
     const fetch = async () => {
       const dataMovies = await fetchMovies("movie/popular");
       setMovies(dataMovies.results);
+      setTotalMovies(dataMovies.total_results);
       const { genres } = await fetchGenres();
       setGenres(genres);
     };
@@ -83,6 +88,11 @@ function App() {
     }
   };
   // console.log(movies);
+
+  const handlePaginate = (number) => {
+    console.log(number);
+  };
+
   return (
     <StyledApp>
       <Header>
@@ -134,6 +144,11 @@ function App() {
                 return <Movie key={i} {...movie} />;
               })}
           </div>
+          <Pagination
+            moviesPerPage={moviesPerPage}
+            totalMovies={totalMovies}
+            paginate={handlePaginate}
+          />
         </div>
       </Container>
     </StyledApp>

@@ -65,7 +65,7 @@ export const Container = styled.div`
   }
 
   .right-side {
-    display: flex;
+    /* display: flex; */
     /* align-items: center; */
     /* justify-content: space-around; */
     max-width: 85%;
