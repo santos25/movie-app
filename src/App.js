@@ -6,6 +6,7 @@ import { fetchMovies } from "./Api/Api";
 import Filter from "./Components/Filter/Filter";
 import Categories from "./Components/Categories/Categories";
 import Movie from "./Components/Movie/Movie";
+import CreateMovie from "./Components/Movie/CreateMovie";
 import Pagination from "./Components/Pagination/Pagination";
 
 import "./App.css";
@@ -19,6 +20,7 @@ function App() {
   const [totalMovies, setTotalMovies] = useState(0);
   const [endpoint, setEndPoint] = useState("movie/popular?");
   const [addedMovies, setAddedMovies] = useState([]);
+  const [moviepage, setMoviepage] = useState("create");
 
   useEffect(() => {
     const fetch = async () => {
@@ -107,6 +109,11 @@ function App() {
     setMovies(results);
   };
 
+  const handleSubmitMovie =  (e) => {
+    e.preventDefault();
+    console.log();
+  }
+
   return (
     <StyledApp>
       <Header>
@@ -121,6 +128,11 @@ function App() {
             placeholder="Find whatever you want"
             onChange={(e) => handleSearchMovie(e)}
           />
+        </div>
+        <div className="addmovie">
+          <i class="fas fa-plus" onClick={() => setMoviepage("create")}></i>
+
+          <h3>Add Movie</h3>
         </div>
       </Header>
       <Container>
@@ -151,18 +163,24 @@ function App() {
           <Categories />
         </div>
         <div className="right-side">
-          <div className="movies">
-            {movies
-              // .filter((_, i) => i < 1)
-              .map((movie, i) => {
-                return <Movie key={i} {...movie} />;
-              })}
-          </div>
-          <Pagination
-            moviesPerPage={moviesPerPage}
-            totalMovies={totalMovies}
-            paginate={handlePaginate}
-          />
+          {moviepage === "list" ? (
+            <>
+              <div className="movies">
+                {movies
+                  // .filter((_, i) => i < 1)
+                  .map((movie, i) => {
+                    return <Movie key={i} {...movie} />;
+                  })}
+              </div>
+              <Pagination
+                moviesPerPage={moviesPerPage}
+                totalMovies={totalMovies}
+                paginate={handlePaginate}
+              />
+            </>
+          ) : (
+            <CreateMovie />
+          )}
         </div>
       </Container>
     </StyledApp>
