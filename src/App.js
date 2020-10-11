@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyledApp, Header, Container } from "./StyledApp";
 
-import { fetchMovies, fetchSearchMovie, fetchGenres } from "./Api/Api";
+import { fetchMovies } from "./Api/Api";
 
 import Filter from "./Components/Filter/Filter";
 import Categories from "./Components/Categories/Categories";
@@ -17,14 +17,15 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [moviesPerPage] = useState(20);
   const [totalMovies, setTotalMovies] = useState(0);
-  const [endpoint, setEndPoint] = useState("movie/popular");
+  const [endpoint, setEndPoint] = useState("movie/popular?");
+  const [addedMovies, setAddedMovies] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
       const dataMovies = await fetchMovies(endpoint);
       setMovies(dataMovies.results);
       setTotalMovies(dataMovies.total_results);
-      const { genres } = await fetchGenres();
+      const { genres } = await fetchMovies("genre/movie/list");
       setGenres(genres);
     };
 
@@ -34,8 +35,11 @@ function App() {
   const handleSearchMovie = async (e) => {
     const value = e.target.value;
     let response = [];
+
     if (value !== "") {
-      response = await fetchSearchMovie(value);
+      const newEndPoint = `search/movie?query=${encodeURI(value)}&`;
+      response = await fetchMovies(newEndPoint);
+      setEndPoint(newEndPoint);
       settitle("Most Popular");
     } else {
       response = await fetchMovies(endpoint);
@@ -52,29 +56,28 @@ function App() {
         response = await fetchMovies("movie/popular");
         setMovies(response.results);
         settitle("Most Popular");
-        setEndPoint("movie/popular");
+        setEndPoint("movie/popular?");
 
         break;
       case "now":
         response = await fetchMovies("movie/now_playing");
         setMovies(response.results);
         settitle("Now Playing");
-        setEndPoint("movie/now_playing");
+        setEndPoint("movie/now_playing?");
 
         break;
       case "top":
         response = await fetchMovies("movie/top_rated");
         setMovies(response.results);
         settitle("Top Rated");
-        setEndPoint("movie/top_rated");
+        setEndPoint("movie/top_rated?");
 
         break;
       case "up":
         response = await fetchMovies("movie/upcoming");
         setMovies(response.results);
         settitle("Upcoming");
-        setEndPoint("movie/upcoming");
-
+        setEndPoint("movie/upcoming?");
         break;
       default:
         break;
@@ -82,7 +85,6 @@ function App() {
   };
 
   const handleFilterGenres = async (e) => {
-    // console.log(e.target.value);
     const value = e.target.value;
     let response;
     if (value === "all") {
@@ -90,17 +92,19 @@ function App() {
       setMovies(response.results);
       settitle("Most Popular");
     } else {
-      const newEndPoint = "discover/movie";
-      response = await fetchMovies(`${newEndPoint}?with_genres=${value}`);
+      const newEndPoint = `discover/movie?with_genres=${value}&`;
+      response = await fetchMovies(`${newEndPoint}`);
       setMovies(response.results);
       setEndPoint(newEndPoint);
     }
   };
-  // console.log(movies);
 
-  const handlePaginate = (number) => {
+  const handlePaginate = async (number) => {
     console.log(number);
     console.log(endpoint);
+    const { results } = await fetchMovies(`${endpoint}page=${number}`);
+    // console.log(results);
+    setMovies(results);
   };
 
   return (

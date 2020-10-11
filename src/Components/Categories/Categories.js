@@ -1,17 +1,22 @@
 import React from "react";
 
+import { StyledCategory } from "./StyledCategories";
+
 const Categories = () => {
   return (
-    <div>
+    <StyledCategory>
       <h3>Categories</h3>
       <div>
         <ul>
-          <li>Documents</li>
-          <li>TV Shows</li>
-          <li>Commercials</li>
+          <li>
+            <a>Movies </a>
+          </li>
+          <li>
+            <a>TV Shows </a>
+          </li>
         </ul>
       </div>
-    </div>
+    </StyledCategory>
   );
 };
 

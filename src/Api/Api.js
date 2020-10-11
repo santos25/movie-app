@@ -21,30 +21,3 @@ export const fetchMovies = async (endPoint) => {
     console.log(error);
   }
 };
-
-export const fetchSearchMovie = async (search) => {
-  const response = await fetch(
-    API_URL + "search/movie?query=" + encodeURI(search),
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-        Authorization: `Bearer ${READ_ACCESS_TOKEN}`,
-      },
-    }
-  );
-
-  return response.json();
-};
-
-export const fetchGenres = async () => {
-  const response = await fetch(API_URL + "genre/movie/list", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-      Authorization: `Bearer ${READ_ACCESS_TOKEN}`,
-    },
-  });
-
-  return response.json();
-};
