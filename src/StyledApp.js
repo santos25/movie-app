@@ -37,6 +37,20 @@ export const Header = styled.header`
       color: #a6a6a4;
     }
   }
+
+  .addmovie {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 15px;
+    width: 55%;
+
+    i {
+      font-size: 1.5rem;
+      padding: 0 15px;
+      cursor: pointer;
+    }
+  }
 `;
 
 export const Container = styled.div`
