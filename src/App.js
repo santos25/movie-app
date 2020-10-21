@@ -1,25 +1,26 @@
 import React from "react";
 import { GlobalStyles } from "./GlobalStyles";
-import Jumbotron from "./components/jumbotron/Jumbotron";
-import Container from "./components/jumbotron/Container";
 
-import jumboData from "./fixtures/jumbo.json";
+import Home from "./pages/Home";
+import SignIn from "./pages/SignIn";
+
+import * as ROUTES from "./constants/Routes";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
   return (
     <div>
-      <GlobalStyles />
-      <Container>
-        {jumboData.map((item) => (
-          <Jumbotron
-            key={item.id}
-            titulo={item.title}
-            subTitulo={item.subTitle}
-            image={item.image}
-            direction={item.direction}
-          />
-        ))}
-      </Container>
+      <Router basename="/movie-app">
+        <GlobalStyles />
+        <Switch>
+          <Route exact path={ROUTES.HOME}>
+            <Home />
+          </Route>
+          <Route exact path={ROUTES.SIGNIN}>
+            <SignIn />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 };

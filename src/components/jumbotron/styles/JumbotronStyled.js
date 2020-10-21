@@ -10,6 +10,7 @@ export const JumbotronStyled = styled.div`
   max-width: 1100px;
   width: 100%;
   padding: 1rem 1rem;
+  color: white;
   @media (max-width: 600px) {
     flex-direction: column;
   }
@@ -25,7 +26,6 @@ export const Titulo = styled.h1`
 
 export const SubTitulo = styled.h2`
   font-size: 26px;
-  color: gray;
 
   @media (max-width: 600px) {
     font-size: 15px;

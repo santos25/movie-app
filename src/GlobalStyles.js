@@ -8,7 +8,7 @@ export const GlobalStyles = createGlobalStyle`
 body, html{
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   background-color: #000000;
   color: #333333;
 } 
