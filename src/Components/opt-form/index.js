@@ -4,8 +4,8 @@ const OptForm = () => {
   return (
     <Inner>
       <Title>
-        ¿Quieres ver Porno ya? Ingresa tu email para crear una cuenta o
-        reiniciar tu membresía de Porno
+        ¿Quieres ver Peliculas ya? Ingresa tu email para crear una cuenta o
+        reiniciar tu membresía de Netflix
       </Title>
       <Form>
         <Input />
