@@ -10,7 +10,7 @@ const Header = ({ children }) => {
       <Frame>
         <Link to={HOME}>
           {/* <Logo src={logoNetflix} /> */}
-          <Logo>santflix</Logo>
+          <Logo>Santflix</Logo>
         </Link>
         <ButtonLink to={SIGNIN}>Sign In</ButtonLink>
       </Frame>

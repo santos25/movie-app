@@ -1,22 +1,29 @@
 import React, { useState } from "react";
+import { SIGNIN } from "../constants/Routes";
 import { Form } from "../components";
 import HeaderContainer from "../containers/HeaderContainer";
 import FooterContainer from "../containers/FooterContainer";
-import { SIGNUP } from "../constants/Routes";
 
-const SignIn = () => {
+const SignUp = () => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (target) => {
     target.preventDefault();
-    console.log("Sign In ");
+    console.log("Sign Up ");
   };
+
   return (
     <>
       <HeaderContainer>
-        <Form title="Inicia sesión">
+        <Form title="Registrate">
           <Form.ContainerForm onSubmit={({ target }) => handleSubmit(target)}>
+            <Form.Input
+              value={name}
+              onChange={({ target }) => setName(target.value)}
+              placeholder="Name"
+            />
             <Form.Input
               value={email}
               onChange={({ target }) => setEmail(target.value)}
@@ -30,13 +37,9 @@ const SignIn = () => {
             <Form.ButtonSubmit type="submit">Iniciar Sesion</Form.ButtonSubmit>
           </Form.ContainerForm>
           <Form.Text>
-            ¿Primera vez en Netflix?{" "}
-            <Form.Link to={SIGNUP}> Suscríbete ya.</Form.Link>
+            Ya registrado?
+            <Form.Link to={SIGNIN}>Inicia sesion</Form.Link>
           </Form.Text>
-          <Form.TextSmall>
-            Esta página está protegida por Google reCAPTCHA para comprobar que
-            no eres un robot. Más info.
-          </Form.TextSmall>
         </Form>
       </HeaderContainer>
       <FooterContainer />
@@ -44,4 +47,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
