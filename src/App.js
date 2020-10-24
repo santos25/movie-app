@@ -4,25 +4,47 @@ import { GlobalStyles } from "./GlobalStyles";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Browse from "./pages/Browse";
 
 import * as ROUTES from "./constants/Routes";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ProtectedRoutes, IsUserRedirect } from "./helpers/Routes";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 
 const App = () => {
+  const user = null;
+
   return (
     <div>
       <Router basename="/movie-app">
         <GlobalStyles />
         <Switch>
-          <Route exact path={ROUTES.HOME}>
+          <IsUserRedirect
+            user={user}
+            loggedInPath={ROUTES.BROWSE}
+            exact
+            path={ROUTES.HOME}
+          >
             <Home />
-          </Route>
-          <Route exact path={ROUTES.SIGNIN}>
+          </IsUserRedirect>
+          <ProtectedRoutes user={user} exact path={ROUTES.BROWSE}>
+            <Browse />
+          </ProtectedRoutes>
+          <IsUserRedirect
+            user={user}
+            loggedInPath={ROUTES.BROWSE}
+            exact
+            path={ROUTES.SIGNIN}
+          >
             <SignIn />
-          </Route>
-          <Route exact path={ROUTES.SIGNUP}>
+          </IsUserRedirect>
+          <IsUserRedirect
+            user={user}
+            loggedInPath={ROUTES.BROWSE}
+            exact
+            path={ROUTES.SIGNUP}
+          >
             <SignUp />
-          </Route>
+          </IsUserRedirect>
         </Switch>
       </Router>
     </div>
